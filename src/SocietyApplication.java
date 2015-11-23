@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,6 +16,9 @@ import java.awt.CardLayout;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JList;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
 
 public class SocietyApplication {
 
@@ -65,13 +69,19 @@ public class SocietyApplication {
 		panelMenu.setVisible(true);
 		
 		JButton joinButton = new JButton("Join Society");
-		joinButton.setBounds(245, 67, 134, 51);
+		joinButton.setBounds(290, 11, 134, 51);
 		panelMenu.add(joinButton);
 		
 		JButton createButton = new JButton("Create Society");
 
-		createButton.setBounds(72, 67, 145, 50);
+		createButton.setBounds(10, 11, 145, 50);
 		panelMenu.add(createButton);
+		final DefaultListModel<Society> model = new DefaultListModel();
+		
+		JList list = new JList(model);
+		list.setBounds(63, 93, 310, 142);
+		panelMenu.add(list);
+
 		
 		final JPanel panelSearch = new JPanel();
 		frmSocietySystem.getContentPane().add(panelSearch, "name_154786129304777");
@@ -154,6 +164,9 @@ public class SocietyApplication {
 				String societyDescription= aSocietyDescription.getText();
 				Society aSociety= new Society(societyName,societyDescription,societyMajor,aStudent);
 				mySystem.add(aSociety);
+				model.addElement(aSociety);
+				panelCreateSociety.setVisible(false);
+				panelMenu.setVisible(true);
 				
 			}
 		});

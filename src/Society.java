@@ -83,4 +83,7 @@ public class Society {
     public void setPresident(SocietyMember president) {
         this.president = president;
     }
+    public String toString(){
+    	return name;
+    }
 }
