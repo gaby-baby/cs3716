@@ -1,4 +1,6 @@
-public class SocietyMember extends Student{
+import java.io.Serializable;
+
+public class SocietyMember extends Student implements Serializable{
     /*Having SocietyMember extend student it will be easy for to make special rules for society members, perhaps
     * interest rates on their accounts, attendance record of meetings, ect*/
     double account;
@@ -16,6 +18,7 @@ public class SocietyMember extends Student{
     public double getBalance(){
         return account;
     }
+	
 
 
 

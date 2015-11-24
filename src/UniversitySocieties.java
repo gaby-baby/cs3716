@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class UniversitySocieties {
+public class UniversitySocieties implements Serializable {
     public UniversitySocieties(ArrayList<Society> societies) {
 		this.societies = societies;
 	}    

@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Society {
+public class Society implements Serializable {
     /*The society class' main function is to allow students to create, join or leave a society. We
      * have left it up to the UniversitySocieties Class to remove societies */
 

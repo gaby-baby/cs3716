@@ -1,4 +1,6 @@
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
     /*By making the student class separate from the societyMembers it will be easy to add other fields such as GPA and other student information */
     String name, studentNumber, email, majors;
 
