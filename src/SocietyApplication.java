@@ -59,7 +59,7 @@ public class SocietyApplication {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() throws java.io.IOException {
+	private void initialize()  {
 		frmSocietySystem = new JFrame();
 		frmSocietySystem.setTitle("Society System");
 		frmSocietySystem.setBounds(100, 100, 450, 300);
@@ -80,6 +80,8 @@ public class SocietyApplication {
 		joinButton.setBounds(290, 11, 134, 51);
 		panelMenu.add(joinButton);
 		
+
+		
 		JButton createButton = new JButton("Create Society");
 
 		createButton.setBounds(10, 11, 145, 50);
@@ -91,25 +93,22 @@ public class SocietyApplication {
 		panelMenu.add(list);
 		
 		ObjectInputStream objectInputStream = null;
+		
 		try {
 			objectInputStream = new ObjectInputStream(new FileInputStream("output"));
-		} catch (IOException e1) {
+			mySystem = (UniversitySocieties) objectInputStream.readObject();
+			System.out.println("gothere");
+			Iterator<Society> mySocietys= mySystem.getAllSocieties();
+			while(mySocietys.hasNext()){
+				model.addElement(mySocietys.next());
+			}
+			objectInputStream.close();
+		} catch (IOException | ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		try {
-			UniversitySocieties mySystem = (UniversitySocieties) objectInputStream.readObject();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+	
 		
-		Iterator<Society> mySocietys= mySystem.getAllSocieties();
-		while(mySocietys.hasNext()){
-			model.addElement(mySocietys.next());
-			System.out.println(mySocietys.next().getName());
-		}
 
 
 		final JPanel panelSearch = new JPanel();
