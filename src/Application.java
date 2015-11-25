@@ -24,6 +24,7 @@ public class Application extends JFrame {
 	JPanel viewPort;
 	UniversitySocieties universitySocieties = new UniversitySocieties();
 	Application instance;
+	JButton btnBackButton;
 	/**
 	 * Launch the application.
 	 */
@@ -122,13 +123,13 @@ public class Application extends JFrame {
 		FlowLayout fl_panel_2 = new FlowLayout(FlowLayout.RIGHT, 5, 5);
 		panel_2.setLayout(fl_panel_2);
 		
-		JButton btnNewButton = new JButton("Back");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnBackButton = new JButton("Back");
+		btnBackButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removePanel();
 			}
 		});
-		panel_2.add(btnNewButton);
+		panel_2.add(btnBackButton);
 	}
 	
 	public void addPanel(JPanel panel){
@@ -142,6 +143,11 @@ public class Application extends JFrame {
 		panels.add(panel);
 		viewPort.add(panel, BorderLayout.CENTER);
 		panel.setVisible(true);
+		
+		if(panels.size() == 1)
+			btnBackButton.setEnabled(false);
+		else
+			btnBackButton.setEnabled(true);
 	}
 	
 	public JPanel removePanel(){
@@ -158,6 +164,10 @@ public class Application extends JFrame {
 		viewPort.add(panels.peek(), BorderLayout.CENTER);
 		panels.peek().setVisible(true);
 
+		if(panels.size() == 1)
+			btnBackButton.setEnabled(false);
+		else
+			btnBackButton.setEnabled(true);
 		
 		return panel;
 	}
