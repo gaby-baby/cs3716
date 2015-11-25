@@ -147,8 +147,8 @@ public class Application extends JFrame {
 	}
 	
 	public JPanel removePanel(){
-		if(panels.size() <= 1)
-			return null;
+//		if(panels.size() <= 1)
+//			return null;
 		
 		// Get Current panel and hide it
 		JPanel panel = panels.pop();
@@ -156,7 +156,6 @@ public class Application extends JFrame {
 		panel.setVisible(false);
 		
 		// Set current panel to new panel
-		panels.add(panels.peek());
 		viewPort.add(panels.peek(), BorderLayout.CENTER);
 		panels.peek().setVisible(true);
 
