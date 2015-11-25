@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 
@@ -31,6 +33,7 @@ public class SocietyApplication {
 	private JTextField aStudentName;
 	private JTextField aStudentNumber;
 	private UniversitySocieties mySystem = new UniversitySocieties();
+	private Student aStudent = new Student("Mike Peacock", "200945921", "mnp457@mun.ca");
 
 	/**
 	 * Launch the application.
@@ -60,6 +63,9 @@ public class SocietyApplication {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize()  {
+		//temp login assume that a user has log in and the student object is created from info
+		
+		
 		frmSocietySystem = new JFrame();
 		frmSocietySystem.setTitle("Society System");
 		frmSocietySystem.setBounds(100, 100, 450, 300);
@@ -76,19 +82,21 @@ public class SocietyApplication {
 		panelMenu.setLayout(null);
 		panelMenu.setVisible(true);
 
+		//buttons
+		
 		JButton joinButton = new JButton("Join Society");
 		joinButton.setBounds(290, 11, 134, 51);
 		panelMenu.add(joinButton);
 		
-
 		
 		JButton createButton = new JButton("Create Society");
-
 		createButton.setBounds(10, 11, 145, 50);
 		panelMenu.add(createButton);
+		
+		
+		
 		final DefaultListModel<Society> model = new DefaultListModel();
-
-		JList list = new JList(model);
+		final JList list = new JList(model);
 		list.setBounds(63, 93, 310, 142);
 		panelMenu.add(list);
 		
@@ -97,7 +105,6 @@ public class SocietyApplication {
 		try {
 			objectInputStream = new ObjectInputStream(new FileInputStream("output"));
 			mySystem = (UniversitySocieties) objectInputStream.readObject();
-			System.out.println("gothere");
 			Iterator<Society> mySocietys= mySystem.getAllSocieties();
 			while(mySocietys.hasNext()){
 				model.addElement(mySocietys.next());
@@ -119,12 +126,28 @@ public class SocietyApplication {
 		frmSocietySystem.getContentPane().add(panelCreateSociety, "name_154786136890495");
 		panelCreateSociety.setLayout(null);
 		panelCreateSociety.setVisible(false);
-
+		
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMenu.setVisible(false);
 				panelCreateSociety.setVisible(true);
 			}
+		});
+		
+		joinButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selectedSociety = list.getSelectedValue().toString();
+				if (mySystem.Search(selectedSociety)!=null){
+				System.out.println(selectedSociety);
+				mySystem.Search(selectedSociety).joinSociety(aStudent);
+				JOptionPane.showMessageDialog(null, "Join Successful");
+				Iterator<SocietyMember> mySocietys= mySystem.Search(selectedSociety).members.iterator();
+				System.out.println("List of all Members: ");
+				while(mySocietys.hasNext()){
+					System.out.println(mySocietys.next().getName());
+				}
+			}else{
+				JOptionPane.showMessageDialog(null, "None Selected");}}
 		});
 
 		aStudentEmail = new JTextField();
