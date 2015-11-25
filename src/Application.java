@@ -15,6 +15,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.GridBagLayout;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 
 
 public class Application extends JFrame {
@@ -64,13 +67,14 @@ public class Application extends JFrame {
 		setTitle("Memorial University Society Manager");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 768, 650);
+		setBounds(100, 100, 472, 613);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -81,13 +85,14 @@ public class Application extends JFrame {
 		viewPort = new JPanel();
 		contentPane.add(viewPort, BorderLayout.CENTER);
 		viewPort.setLayout(new BorderLayout(0, 0));
-		
+		viewPort.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JPanel panel_3 = new JPanel();
 		addPanel(panel_3);
 		panel_3.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 25, 264, 518);
+		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1.setBounds(10, 11, 264, 483);
 		panel_3.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -105,7 +110,7 @@ public class Application extends JFrame {
 		
 
 		
-		btnCreateSociety.setBounds(597, 25, 145, 23);
+		btnCreateSociety.setBounds(299, 11, 145, 23);
 		panel_3.add(btnCreateSociety);
 		
 		JButton btnNewButton_1 = new JButton("Search Societies");
@@ -115,10 +120,11 @@ public class Application extends JFrame {
 				addPanel(panel);
 			}
 		});
-		btnNewButton_1.setBounds(597, 59, 145, 23);
+		btnNewButton_1.setBounds(299, 45, 145, 23);
 		panel_3.add(btnNewButton_1);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		FlowLayout fl_panel_2 = new FlowLayout(FlowLayout.RIGHT, 5, 5);
 		panel_2.setLayout(fl_panel_2);
@@ -154,6 +160,7 @@ public class Application extends JFrame {
 		JPanel panel = panels.pop();
 		viewPort.remove(panel);
 		panel.setVisible(false);
+		panel = null;
 		
 		// Set current panel to new panel
 		viewPort.add(panels.peek(), BorderLayout.CENTER);
