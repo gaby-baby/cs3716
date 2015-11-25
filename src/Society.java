@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Society implements Serializable {
@@ -40,6 +41,14 @@ public class Society implements Serializable {
         return removed;
     }
 
+    
+    public boolean isMemeber(Student aStudent){
+    	Iterator<SocietyMember> mem = members.iterator();
+    	while(mem.hasNext()){
+    		if( mem.next().getStudentNumber().equals(aStudent.getStudentNumber())) return true;	
+    	}
+    	return false;
+    }
     public String getName() {
         return name;
     }
