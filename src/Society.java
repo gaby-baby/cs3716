@@ -36,6 +36,11 @@ public class Society implements Serializable {
             if (amember.getStudentNumber().equals(studentNumber)){
                 members.remove(i);
                 removed=true;
+                if(members.size()<20) {
+                    if (isSanctioned()) {
+                        this.setSanctioned(false);
+                    }
+                }
         }
         }
         return removed;

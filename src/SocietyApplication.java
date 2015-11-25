@@ -104,12 +104,13 @@ public class SocietyApplication {
 		
 		try {
 			objectInputStream = new ObjectInputStream(new FileInputStream("output"));
+			if(objectInputStream != null){
 			mySystem = (UniversitySocieties) objectInputStream.readObject();
 			Iterator<Society> mySocietys= mySystem.getAllSocieties();
 			while(mySocietys.hasNext()){
 				model.addElement(mySocietys.next());
 			}
-			objectInputStream.close();
+			objectInputStream.close();}
 		} catch (IOException | ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
