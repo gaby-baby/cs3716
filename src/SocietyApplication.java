@@ -141,11 +141,11 @@ public class SocietyApplication {
 				System.out.println(selectedSociety);
 				mySystem.Search(selectedSociety).joinSociety(aStudent);
 				JOptionPane.showMessageDialog(null, "Join Successful");
-				Iterator<SocietyMember> mySocietys= mySystem.Search(selectedSociety).members.iterator();
+				/*Iterator<SocietyMember> mySocietys= mySystem.Search(selectedSociety).members.iterator();
 				System.out.println("List of all Members: ");
 				while(mySocietys.hasNext()){
 					System.out.println(mySocietys.next().getName());
-				}
+				}*/
 			}else{
 				JOptionPane.showMessageDialog(null, "None Selected");}}
 		});
