@@ -153,8 +153,8 @@ public class Application extends JFrame {
 	}
 	
 	public JPanel removePanel(){
-//		if(panels.size() <= 1)
-//			return null;
+		if(panels.size() <= 1)
+			return null;
 		
 		// Get Current panel and hide it
 		JPanel panel = panels.pop();
