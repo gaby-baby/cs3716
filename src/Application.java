@@ -144,10 +144,6 @@ public class Application extends JFrame {
 		viewPort.add(panel, BorderLayout.CENTER);
 		panel.setVisible(true);
 		
-		if(panels.size() == 1)
-			btnBackButton.setEnabled(false);
-		else
-			btnBackButton.setEnabled(true);
 	}
 	
 	public JPanel removePanel(){
@@ -164,11 +160,6 @@ public class Application extends JFrame {
 		viewPort.add(panels.peek(), BorderLayout.CENTER);
 		panels.peek().setVisible(true);
 
-		if(panels.size() == 1)
-			btnBackButton.setEnabled(false);
-		else
-			btnBackButton.setEnabled(true);
-		
 		return panel;
 	}
 }
