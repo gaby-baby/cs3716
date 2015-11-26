@@ -78,6 +78,7 @@ public class LoginPanel extends JPanel{
 		add(txtEmail, "4, 6, fill, default");
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
+			// Creates the Student object, not set up to do anything else at this point
 			public void actionPerformed(ActionEvent arg0) {
 				if(txtName.getText().isEmpty()){
 					JOptionPane.showMessageDialog(null, "Error, Please fill in the Name Field");
@@ -92,7 +93,7 @@ public class LoginPanel extends JPanel{
 					return;
 				}
 				Student aStudent= new Student(txtName.getText(),txtStudentId.getText(),txtEmail.getText());
-				user=aStudent;
+				
 				
 			}
 		});
