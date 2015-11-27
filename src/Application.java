@@ -18,6 +18,7 @@ import java.awt.GridBagLayout;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.SwingConstants;
 
 
 public class Application extends JFrame {
@@ -97,13 +98,14 @@ public class Application extends JFrame {
 		panel_1.setLayout(null);
 		
 		JLabel lblEvents = new JLabel("Events");
-		lblEvents.setBounds(115, 5, 33, 14);
+		lblEvents.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEvents.setBounds(10, 5, 244, 14);
 		panel_1.add(lblEvents);
 		
 		JButton btnCreateSociety = new JButton("Create Society");
 		btnCreateSociety.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JPanel panel = new CreateSocietyPanel(universitySocieties);
+				JPanel panel = new CreateSocietyPanel(instance, universitySocieties);
 				addPanel(panel);
 			}
 		});
@@ -122,6 +124,10 @@ public class Application extends JFrame {
 		});
 		btnNewButton_1.setBounds(299, 45, 145, 23);
 		panel_3.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("My Societies");
+		btnNewButton.setBounds(299, 79, 145, 23);
+		panel_3.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -156,7 +162,7 @@ public class Application extends JFrame {
 		if(panels.size() <= 1)
 			return null;
 		
-		// Get Current panel and hide it
+		// Get Current panel and dispose of it
 		JPanel panel = panels.pop();
 		viewPort.remove(panel);
 		panel.setVisible(false);
@@ -167,5 +173,21 @@ public class Application extends JFrame {
 		panels.peek().setVisible(true);
 
 		return panel;
+	}
+	
+	
+	public void swapPanel(JPanel newPanel){
+		if(panels.isEmpty())
+			return;
+		
+		// Get Current panel and dispose of it
+		JPanel panel = panels.pop();
+		viewPort.remove(panel);
+		panel.setVisible(false);
+		panel = null;
+		
+		// Set current panel to new panel
+		addPanel(newPanel);
+
 	}
 }

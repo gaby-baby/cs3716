@@ -26,7 +26,7 @@ public class ViewSocietyPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewSocietyPanel(UniversitySocieties societies, Society s) {
+	public ViewSocietyPanel(final Application app, UniversitySocieties societies, Society s) {
 		this.society = s;
 		this.universitySocieties = societies;
 		
@@ -82,6 +82,7 @@ public class ViewSocietyPanel extends JPanel {
 		
 		JLabel lblSocietyDescription = new JLabel("Society Description:");
 		GridBagConstraints gbc_lblSocietyDescription = new GridBagConstraints();
+		gbc_lblSocietyDescription.anchor = GridBagConstraints.NORTH;
 		gbc_lblSocietyDescription.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSocietyDescription.gridx = 0;
 		gbc_lblSocietyDescription.gridy = 2;
@@ -103,7 +104,7 @@ public class ViewSocietyPanel extends JPanel {
 		
 		JLabel lblMembers = new JLabel("Members:");
 		GridBagConstraints gbc_lblMembers = new GridBagConstraints();
-		gbc_lblMembers.anchor = GridBagConstraints.EAST;
+		gbc_lblMembers.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblMembers.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMembers.gridx = 0;
 		gbc_lblMembers.gridy = 3;

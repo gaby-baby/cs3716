@@ -81,7 +81,7 @@ public class SearchSocietyPanel extends JPanel {
 			public void mouseClicked(MouseEvent evt) {
 				if(evt.getClickCount() == 2){
 					if(lstResults.getSelectedValue() != null){
-						app.addPanel(new ViewSocietyPanel(universitySocieties,(Society)lstResults.getSelectedValue()));
+						app.addPanel(new ViewSocietyPanel(app, universitySocieties,(Society)lstResults.getSelectedValue()));
 					}
 				}
 			}

@@ -26,7 +26,7 @@ public class CreateSocietyPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CreateSocietyPanel(UniversitySocieties societies) {
+	public CreateSocietyPanel(final Application app, UniversitySocieties societies) {
 		this.universitySocieties = societies;
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -58,7 +58,7 @@ public class CreateSocietyPanel extends JPanel {
 		txtSocietyMajor.setColumns(10);
 		
 		JLabel lblSocietyDescription = new JLabel("Society Description:");
-		add(lblSocietyDescription, "2, 6, right, default");
+		add(lblSocietyDescription, "2, 6, right, top");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -71,8 +71,11 @@ public class CreateSocietyPanel extends JPanel {
 		JButton btnCreateSociety = new JButton("Create Society");
 		btnCreateSociety.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				universitySocieties.add(new Society(txtSocietyName.getText(), txtSocietyDescription.getText(), txtSocietyMajor.getText(), universitySocieties.studentLoggedIn));
-				JOptionPane.showMessageDialog(null, "Society Created!");
+				Society society = new Society(txtSocietyName.getText(), txtSocietyDescription.getText(), txtSocietyMajor.getText(), universitySocieties.studentLoggedIn);
+				universitySocieties.add(society);
+				app.removePanel();
+				app.addPanel(new TransitionPanel(app, 1500, new ViewSocietyPanel(app, universitySocieties, society), txtSocietyName.getText() + " has been created!"));
+				
 			}
 		});
 		add(btnCreateSociety, "4, 8, right, default");
