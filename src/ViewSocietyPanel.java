@@ -1,22 +1,19 @@
-import javax.swing.JPanel;
-
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 
 
 public class ViewSocietyPanel extends JPanel {
@@ -24,7 +21,8 @@ public class ViewSocietyPanel extends JPanel {
 	Society society;
 	private JTextField txtName;
 	private JTextField txtMajor;
-	private JTextField txtMemberCount;
+	private JTable tblMembers;
+	DefaultTableModel memberTableModel;
 	/**
 	 * Create the panel.
 	 */
@@ -36,7 +34,7 @@ public class ViewSocietyPanel extends JPanel {
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblSocietyName = new JLabel("Society Name:");
@@ -111,24 +109,28 @@ public class ViewSocietyPanel extends JPanel {
 		gbc_lblMembers.gridy = 3;
 		add(lblMembers, gbc_lblMembers);
 		
-		txtMemberCount = new JTextField();
-		txtMemberCount.setEditable(false);
-		GridBagConstraints gbc_txtMemberCount = new GridBagConstraints();
-		gbc_txtMemberCount.insets = new Insets(0, 0, 5, 5);
-		gbc_txtMemberCount.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtMemberCount.gridx = 1;
-		gbc_txtMemberCount.gridy = 3;
-		add(txtMemberCount, gbc_txtMemberCount);
-		txtMemberCount.setColumns(10);
-		
 		JButton btnJoinSociety = new JButton("Join Society");
 		btnJoinSociety.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				society.joinSociety(universitySocieties.studentLoggedIn);
 				JOptionPane.showMessageDialog(null, "Society Joined!");
-				txtMemberCount.setText("" + society.getMembers().size());
 			}
 		});
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_1.gridx = 1;
+		gbc_scrollPane_1.gridy = 3;
+		add(scrollPane_1, gbc_scrollPane_1);
+		
+		
+		memberTableModel = new DefaultTableModel(new Object[][]{}, new String[]{"Name", "Student Number", "Position"});
+		tblMembers = new JTable(memberTableModel);
+		
+		
+		scrollPane_1.setViewportView(tblMembers);
 		GridBagConstraints gbc_btnJoinSociety = new GridBagConstraints();
 		gbc_btnJoinSociety.anchor = GridBagConstraints.EAST;
 		gbc_btnJoinSociety.insets = new Insets(0, 0, 0, 5);
@@ -136,10 +138,14 @@ public class ViewSocietyPanel extends JPanel {
 		gbc_btnJoinSociety.gridy = 4;
 		add(btnJoinSociety, gbc_btnJoinSociety);
 		
-		txtMemberCount.setText("" + society.getMembers().size());
+		
 		txtName.setText(society.getName());
 		txtMajor.setText(society.getMajor());
 		txtDescrption.setText(society.getDescription());
+		
+		for(SocietyMember student : society.members){
+			memberTableModel.addRow(new Object[]{student.getName(), student.getStudentNumber(), student.getPosition()});
+		}
 	}
 
 }

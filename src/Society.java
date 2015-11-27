@@ -18,9 +18,13 @@ public class Society implements Serializable {
         this.major = major;
         president=new SocietyMember(aStudent);
         members = new ArrayList<SocietyMember>();
+        president.setPosition("President");
+        members.add(president);
     }
 
     public void joinSociety(Student astudent){
+    	if(isMember(astudent))
+    		return;
         SocietyMember newMember= new SocietyMember(astudent);
         members.add(newMember);
         if(members.size()>=20) {
@@ -47,7 +51,7 @@ public class Society implements Serializable {
     }
 
     
-    public boolean isMemeber(Student aStudent){
+    public boolean isMember(Student aStudent){
     	Iterator<SocietyMember> mem = members.iterator();
     	while(mem.hasNext()){
     		if( mem.next().getStudentNumber().equals(aStudent.getStudentNumber())) return true;	
