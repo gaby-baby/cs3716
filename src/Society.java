@@ -11,6 +11,7 @@ public class Society implements Serializable {
     boolean sanctioned;
     ArrayList<SocietyMember> members;
     SocietyMember president;
+    ArrayList<Event> events;
 
     public Society(String name, String description, String major, Student aStudent) {
         this.name = name;
@@ -92,6 +93,9 @@ public class Society implements Serializable {
 
     public ArrayList<SocietyMember> getMembers() {
         return members;
+    }
+    public ArrayList<Event> getEvents() {
+        return events;
     }
 
 
