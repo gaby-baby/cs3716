@@ -3,16 +3,21 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -23,6 +28,7 @@ public class ViewSocietyPanel extends JPanel {
 	private JTextField txtMajor;
 	private JTable tblMembers;
 	DefaultTableModel memberTableModel;
+	JPopupMenu popupMenu;
 	/**
 	 * Create the panel.
 	 */
@@ -139,6 +145,80 @@ public class ViewSocietyPanel extends JPanel {
 		gbc_btnJoinSociety.gridy = 4;
 		add(btnJoinSociety, gbc_btnJoinSociety);
 		
+		/*
+		 * Here is an example of how we can use a popup menu on the
+		 * list to create more functionality. Let me know if you 
+		 * guys want to use this or not.
+		 */
+		popupMenu = new JPopupMenu();
+		JMenuItem viewDetails = new JMenuItem("View Details");
+		viewDetails.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//View Details of Society Member
+			}
+			
+		});
+		
+		popupMenu.add(viewDetails);
+		JMenuItem banMember = new JMenuItem("Ban");
+		viewDetails.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Ban Member Code
+			}
+			
+		});
+		
+		popupMenu.add(banMember);		
+		
+		JMenuItem removeMember = new JMenuItem("Remove");
+		viewDetails.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//Remove Member Code
+			}
+			
+		});
+		popupMenu.add(removeMember);
+		
+		tblMembers.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent evt) {
+				if(SwingUtilities.isRightMouseButton(evt) && tblMembers.getSelectedRow() > -1){
+					popupMenu.show(tblMembers, evt.getX(), evt.getY());
+				}
+			}
+			
+		});
 		
 		txtName.setText(society.getName());
 		txtMajor.setText(society.getMajor());
