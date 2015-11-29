@@ -3,13 +3,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 public class Event implements Serializable {
+	String eventName;
 	String location;
 	String description;
 	Calendar  date;
-	public Event(String aLocation, String aDescription, GregorianCalendar aDate){
+	public Event(String name, String aLocation, String aDescription, GregorianCalendar aDate){
 		location = aLocation;
 		description = aDescription;
 		date = aDate;	
+		eventName=name;
+	}
+	public String getEventName() {
+		return eventName;
+	}
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 	public String getLocation() {
 		return location;
