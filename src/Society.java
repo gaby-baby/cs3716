@@ -12,6 +12,7 @@ public class Society implements Serializable {
     ArrayList<SocietyMember> members;
     SocietyMember president;
     ArrayList<Event> events;
+    Election currentElection;
 
     public Society(String name, String description, String major, Student aStudent) {
         this.name = name;
@@ -21,6 +22,14 @@ public class Society implements Serializable {
         members = new ArrayList<SocietyMember>();
         president.setPosition("President");
         members.add(president);
+        currentElection=null;
+    }
+    public void callElection(){
+    	currentElection = new Election();
+    }
+    public void endElection(){
+    	Candidate winningCandidate = currentElection.mostVotes();
+    	setPresident(winningCandidate.getMember());
     }
 
     public void joinSociety(Student astudent){
@@ -97,8 +106,6 @@ public class Society implements Serializable {
     public ArrayList<Event> getEvents() {
         return events;
     }
-
-
     public SocietyMember getPresident() {
         return president;
     }
@@ -106,6 +113,8 @@ public class Society implements Serializable {
     public void setPresident(SocietyMember president) {
         this.president = president;
     }
+
+
     public String toString(){
     	return name;
     }
