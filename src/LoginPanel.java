@@ -20,28 +20,13 @@ public class LoginPanel extends JPanel{
 	private JTextField txtName;
 	private JTextField txtStudentId;
 	private JTextField txtEmail;
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginPanel window = new LoginPanel();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	UniversitySocieties universitySocieties;
 
 	/**
 	 * Create the application.
 	 */
-	public LoginPanel() {
+	public LoginPanel(final Application app, UniversitySocieties societies) {
+		universitySocieties = societies;
 		setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -92,7 +77,11 @@ public class LoginPanel extends JPanel{
 					JOptionPane.showMessageDialog(null, "Error, Please fill in the Email Field");
 					return;
 				}
+				
 				Student aStudent= new Student(txtName.getText(),txtStudentId.getText(),txtEmail.getText());
+				universitySocieties.studentLoggedIn = aStudent;
+				
+				app.addPanel(new MainPanel(app, universitySocieties));
 				
 				
 			}

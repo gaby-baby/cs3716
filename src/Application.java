@@ -83,51 +83,11 @@ public class Application extends JFrame {
 		JLabel lblMemorialUniversity = new JLabel("Memorial University Society Manager");
 		panel.add(lblMemorialUniversity);
 		
+		
 		viewPort = new JPanel();
 		contentPane.add(viewPort, BorderLayout.CENTER);
 		viewPort.setLayout(new BorderLayout(0, 0));
 		viewPort.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		JPanel panel_3 = new JPanel();
-		addPanel(panel_3);
-		panel_3.setLayout(null);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setBounds(10, 11, 264, 483);
-		panel_3.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JLabel lblEvents = new JLabel("Events");
-		lblEvents.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEvents.setBounds(10, 5, 244, 14);
-		panel_1.add(lblEvents);
-		
-		JButton btnCreateSociety = new JButton("Create Society");
-		btnCreateSociety.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JPanel panel = new CreateSocietyPanel(instance, universitySocieties);
-				addPanel(panel);
-			}
-		});
-		
-
-		
-		btnCreateSociety.setBounds(299, 11, 145, 23);
-		panel_3.add(btnCreateSociety);
-		
-		JButton btnNewButton_1 = new JButton("Search Societies");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JPanel panel = new SearchSocietyPanel(instance, universitySocieties);
-				addPanel(panel);
-			}
-		});
-		btnNewButton_1.setBounds(299, 45, 145, 23);
-		panel_3.add(btnNewButton_1);
-		
-		JButton btnNewButton = new JButton("My Societies");
-		btnNewButton.setBounds(299, 79, 145, 23);
-		panel_3.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -142,6 +102,10 @@ public class Application extends JFrame {
 			}
 		});
 		panel_2.add(btnBackButton);
+		
+		
+		addPanel(new LoginPanel(instance, universitySocieties));
+		
 	}
 	
 	public void addPanel(JPanel panel){
@@ -151,15 +115,23 @@ public class Application extends JFrame {
 			viewPort.remove(panels.peek());
 		}
 		
-		// Show new panel
 		panels.add(panel);
 		viewPort.add(panel, BorderLayout.CENTER);
 		panel.setVisible(true);
 		
+		if(panels.size() > 2){
+			btnBackButton.setEnabled(true);
+			btnBackButton.setText("Back");
+		} else if (panels.size() > 1) {
+			btnBackButton.setEnabled(true);
+			btnBackButton.setText("Log out");
+		} else {
+			btnBackButton.setEnabled(false);
+		}
 	}
 	
 	public JPanel removePanel(){
-		if(panels.size() <= 1)
+		if(panels.isEmpty())
 			return null;
 		
 		// Get Current panel and dispose of it
@@ -169,25 +141,24 @@ public class Application extends JFrame {
 		panel = null;
 		
 		// Set current panel to new panel
-		viewPort.add(panels.peek(), BorderLayout.CENTER);
-		panels.peek().setVisible(true);
-
+		if(!panels.isEmpty()){
+			viewPort.add(panels.peek(), BorderLayout.CENTER);
+			panels.peek().setVisible(true);
+		}
+		
+		
+		if(panels.size() > 2){
+			btnBackButton.setEnabled(true);
+			btnBackButton.setText("Back");
+		} else if (panels.size() > 1) {
+			btnBackButton.setEnabled(true);
+			btnBackButton.setText("Log out");
+		} else {
+			btnBackButton.setEnabled(false);
+		}
+		
 		return panel;
 	}
 	
-	
-	public void swapPanel(JPanel newPanel){
-		if(panels.isEmpty())
-			return;
-		
-		// Get Current panel and dispose of it
-		JPanel panel = panels.pop();
-		viewPort.remove(panel);
-		panel.setVisible(false);
-		panel = null;
-		
-		// Set current panel to new panel
-		addPanel(newPanel);
 
-	}
 }
